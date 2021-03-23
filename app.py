@@ -1,4 +1,5 @@
 import sqlite3
+import socket
 from flask import Flask, render_template, request, url_for, flash, redirect
 from werkzeug.exceptions import abort
 
@@ -26,6 +27,18 @@ def index():
     posts = conn.execute('SELECT * FROM posts').fetchall()
     conn.close()
     return render_template('index.html', posts=posts)
+
+
+@app.route('/hello')
+def hello():
+    # return 'Hello, World!'
+    internal_ip_output = [l for l in ([ip for ip in socket.gethostbyname_ex(socket.gethostname())[2]
+        if not ip.startswith("127.")][:1], [[(s.connect(('8.8.8.8', 53)),
+        s.getsockname()[0], s.close()) for s in [socket.socket(socket.AF_INET,
+        socket.SOCK_DGRAM)]][0][1]]) if l][0][0]
+    return render_template('hello.html', internal_ip=internal_ip_output)
+
+
 
 @app.route('/<int:post_id>')
 def post(post_id):

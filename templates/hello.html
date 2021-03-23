@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{% block title %} Hello World {% endblock %}</h1>
+
+    <article>
+        <p>This app is running behind a load balancer</p>
+        <P>web-server ip: {{ internal_ip }}</P>
+        <div>
+            <p>&mdash; DevOps Test App </p>
+        </div>
+    </article>
+
+{% endblock %}
+
