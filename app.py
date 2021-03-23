@@ -2,7 +2,7 @@ import sqlite3
 import socket
 from flask import Flask, render_template, request, url_for, flash, redirect
 from werkzeug.exceptions import abort
-
+from waitress import serve
 
 def get_db_connection():
     conn = sqlite3.connect('database.db')
@@ -93,3 +93,7 @@ def delete(id):
     conn.close()
     flash('"{}" was successfully deleted!'.format(post['title']))
     return redirect(url_for('index'))
+
+if __name__ == "__main__":
+   #app.run() ##Replaced with below code to run it using waitress
+   serve(app, host='0.0.0.0', port=5000)
