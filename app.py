@@ -1,3 +1,4 @@
+import os
 import socket
 from flask import Flask, render_template, request, json, url_for, flash, redirect
 from werkzeug.exceptions import abort
@@ -8,9 +9,9 @@ import mysql.connector
 # MySQL configurations
 app = Flask(__name__)
 
-app.config['MYSQL_HOST'] = '192.168.50.10'
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'vg-toor'
+app.config['MYSQL_HOST'] = os.environ.get('DATABASE_HOST')
+app.config['MYSQL_USER'] = os.environ.get('DATABASE_USERNAME')
+app.config['MYSQL_PASSWORD'] = os.environ.get('DATABASE_PASSWORD')
 app.config['MYSQL_DB'] = 'blog'
 
 mysql = MySQL(app)
