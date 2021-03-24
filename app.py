@@ -9,10 +9,10 @@ import mysql.connector
 # MySQL configurations
 app = Flask(__name__)
 
-app.config['MYSQL_HOST'] = os.environ.get('DATABASE_HOST')
-app.config['MYSQL_USER'] = os.environ.get('DATABASE_USERNAME')
-app.config['MYSQL_PASSWORD'] = os.environ.get('DATABASE_PASSWORD')
-app.config['MYSQL_DB'] = 'blog'
+app.config['MYSQL_HOST'] = 'DATABASE_HOST'
+app.config['MYSQL_USER'] = 'DATABASE_USERNAME'
+app.config['MYSQL_PASSWORD'] = 'DATABASE_PASSWORD'
+app.config['MYSQL_DB'] = 'DATABASE_NAME'
 
 mysql = MySQL(app)
 app.config['SECRET_KEY'] = 'your secret key'
